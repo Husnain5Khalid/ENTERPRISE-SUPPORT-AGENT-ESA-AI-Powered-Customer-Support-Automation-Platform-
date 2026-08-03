@@ -1,13 +1,18 @@
-from langgraph.graph import MessagesState
+from typing import Annotated
+from typing_extensions import TypedDict
+
+from langgraph.graph.message import add_messages
 
 
-class SupportState(MessagesState):
-    customer_id: str | None = None
-    ticket_id: str | None = None
-    intent: str | None = None
-    customer: dict | None = None
-    knowledge: list | None = None
-    decision: str | None = None
+class SupportState(TypedDict):
+    messages: Annotated[list, add_messages]
+
+    ticket_id: str
+    customer_id: str
+
+    status: str
+
+    route: str
 
 '''
 Why MessagesState?
