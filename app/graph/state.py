@@ -13,6 +13,8 @@ class SupportState(TypedDict):
     status: str
 
     route: str
+    
+    knowledge: str
 
 '''
 Why MessagesState?
