@@ -10,24 +10,26 @@ def support_agent(state):
     """
 
     knowledge = state.get("knowledge", "")
+    customer = state.get("customer", {})
 
     messages = [
         SystemMessage(
-            content=f"""
+    content=f"""
 {SYSTEM_PROMPT}
 
-You have access to the following knowledge retrieved from the company's internal documentation.
+Customer Information
 
--------------------------
+{customer}
+
+Company Knowledge
+
 {knowledge}
--------------------------
 
-Instructions:
-- Use the retrieved knowledge to answer the customer's question.
-- If the knowledge does not contain the answer, politely inform the customer that the issue will be escalated to the support team.
-- Do not make up policies or troubleshooting steps.
-- Keep the response concise and professional.
+Use both customer information and company knowledge before answering.
+
+Never invent information.
 """
+
         ),
         *state["messages"],
     ]
