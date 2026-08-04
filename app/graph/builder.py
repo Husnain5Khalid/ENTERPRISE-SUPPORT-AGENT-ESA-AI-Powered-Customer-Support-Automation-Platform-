@@ -7,6 +7,7 @@ from app.graph.guardrail import guardrail_node
 from app.agents.support_agent import support_agent
 from app.tools.registry import TOOLS
 from app.agents.classifier_agent import classifier_agent
+from app.graph.escalation import escalation_node
 
 # Create graph
 graph = StateGraph(SupportState)
@@ -27,6 +28,7 @@ graph.add_node("classifier", classifier_agent)
 
 graph.add_edge(START, "classifier")
 graph.add_edge("classifier", "agent")
+graph.add_node("escalation", escalation_node)
 
 
 graph.add_conditional_edges(
@@ -40,8 +42,8 @@ graph.add_conditional_edges(
 
 
 graph.add_edge("tools", "agent")
-
-graph.add_edge("guardrail", END)
+graph.add_edge("guardrail", "escalation")
+graph.add_edge("escalation", END)
 
 
 # -----------------------------
