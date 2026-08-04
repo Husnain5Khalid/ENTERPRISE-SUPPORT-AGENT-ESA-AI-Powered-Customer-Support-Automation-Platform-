@@ -1,18 +1,22 @@
 from langchain_core.messages import HumanMessage, SystemMessage
+
 from app.agents.llm import llm
+from app.utils.parser import parse_json
 
 
 def classifier_agent(state):
 
     prompt = """
-Classify this support ticket.
+You are a customer support ticket classifier.
 
-Return ONLY JSON.
+Classify the ticket.
+
+Return ONLY valid JSON.
 
 {
-  "category":"",
-  "priority":"",
-  "sentiment":""
+  "category": "",
+  "priority": "",
+  "sentiment": ""
 }
 """
 
@@ -21,5 +25,10 @@ Return ONLY JSON.
         HumanMessage(content=state["messages"][-1].content)
     ])
 
-    return response
+    result = parse_json(response.content)
 
+    return {
+        "category": result.get("category", "General Inquiry"),
+        "priority": result.get("priority", "Medium"),
+        "sentiment": result.get("sentiment", "Neutral"),
+    }
