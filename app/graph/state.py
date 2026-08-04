@@ -5,20 +5,28 @@ from langgraph.graph.message import add_messages
 
 
 class SupportState(TypedDict):
+    # Conversation
     messages: Annotated[list, add_messages]
 
+    # Ticket Information
     ticket_id: str
     customer_id: str
-
     status: str
 
-    route: str
-
-    knowledge: str
-
+    # Customer Information
     customer: dict
 
-    status: str
+    # AI Classification
+    category: str
+    priority: str
+    sentiment: str
+
+    # Routing
+    route: str
+    escalation: bool
+
+    # RAG
+    knowledge: str
 
 '''
 Why MessagesState?
