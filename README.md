@@ -310,5 +310,6 @@ This project is provided for educational and portfolio purposes.
 ---
 
 # Author
+Husnain Khalid
 
 Developed as an enterprise AI customer support platform using modern LLM engineering practices, LangGraph workflows, Retrieval-Augmented Generation (RAG), and FastAPI.
