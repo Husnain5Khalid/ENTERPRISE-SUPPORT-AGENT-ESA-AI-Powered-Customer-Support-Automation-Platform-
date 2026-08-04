@@ -24,6 +24,7 @@ class SupportState(TypedDict):
     # Routing
     route: str
     escalation: bool
+    escalation_reason: str
 
     # RAG
     knowledge: str
