@@ -10,16 +10,17 @@ def support_agent(state):
     """
 
     messages = [
-        SystemMessage(content=SYSTEM_PROMPT),
-
-        # Customer context supplied by backend
-        HumanMessage(
-            content=f"Customer ID: {state['customer_id']}"
+    SystemMessage(content=SYSTEM_PROMPT),
+    HumanMessage(
+        content=f"""
+    Customer ID: {state['customer_id']}
+    Category: {state['category']}
+    Priority: {state['priority']}
+    Sentiment: {state['sentiment']}
+    """
         ),
-
-        # User's support message
         *state["messages"],
-    ]
+]
 
     response = llm_with_tools.invoke(messages)
 
