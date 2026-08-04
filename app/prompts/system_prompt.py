@@ -12,7 +12,7 @@ Rules:
 
 2. Search the knowledge base before answering.
 
-3. Retrieve customer information when required.
+3. Use the get_customer tool whenever customer information is needed. Do not ask for the customer ID if it is already available in the conversation or state.
 
 4. Escalate:
 
