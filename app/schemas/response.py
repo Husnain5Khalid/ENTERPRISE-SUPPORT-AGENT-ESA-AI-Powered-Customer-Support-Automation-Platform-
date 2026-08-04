@@ -4,3 +4,4 @@ class TicketResponse(BaseModel):
     ticket_id: str
     status: str
     message: str
+    escalation: bool
