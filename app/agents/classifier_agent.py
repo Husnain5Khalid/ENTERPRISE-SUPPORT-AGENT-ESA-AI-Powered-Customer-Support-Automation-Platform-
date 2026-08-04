@@ -16,8 +16,15 @@ Return ONLY valid JSON.
 {
   "category": "",
   "priority": "",
-  "sentiment": ""
+  "sentiment": "",
+  "route": ""
 }
+
+Possible routes:
+- technical
+- billing
+- refund
+- general
 """
 
     response = llm.invoke([
@@ -25,10 +32,18 @@ Return ONLY valid JSON.
         HumanMessage(content=state["messages"][-1].content)
     ])
 
-    result = parse_json(response.content)
+    content = response.content
+    if isinstance(content, list):
+        content = "".join(
+            item["text"]
+            for item in content
+            if item.get("type") == "text"
+        )
+    result = parse_json(content)
 
     return {
-        "category": result.get("category", "General Inquiry"),
-        "priority": result.get("priority", "Medium"),
-        "sentiment": result.get("sentiment", "Neutral"),
+    "category": result.get("category", "General Inquiry"),
+    "priority": result.get("priority", "Medium"),
+    "sentiment": result.get("sentiment", "Neutral"),
+    "route": result.get("route", "general"),
     }

@@ -2,8 +2,18 @@ from langchain_core.messages import AIMessage
 
 
 def escalation_node(state):
+    content = state["messages"][-1].content
 
-    message = state["messages"][-1].content.lower()
+    if isinstance(content, list):
+        content = "".join(
+            item["text"]
+            for item in content
+            if item.get("type") == "text"
+        )
+
+    message = content.lower()
+
+    # rest of your logic
 
     reason = None
 

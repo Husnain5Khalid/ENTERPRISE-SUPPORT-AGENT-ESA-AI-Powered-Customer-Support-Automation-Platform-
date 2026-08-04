@@ -1,11 +1,7 @@
 from langgraph.prebuilt import tools_condition
 
 def should_continue(state):
-
-    if state["route"] == "technical":
-        return "knowledge"
-
-    return "agent"
+    return tools_condition(state)
 
 
 '''

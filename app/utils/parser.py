@@ -2,32 +2,22 @@ import json
 import re
 
 
-def parse_json(text: str) -> dict:
-    """
-    Extract JSON from an LLM response.
-    """
+import json
 
-    if not text:
-        return {}
+def parse_json(text):
 
-    # Remove markdown code fences
+    if isinstance(text, list):
+        text = "\n".join(
+            item.get("text", "")
+            for item in text
+            if item.get("type") == "text"
+        )
+
+    if not isinstance(text, str):
+        raise TypeError(f"Expected str or list, got {type(text)}")
+
     text = text.replace("```json", "")
     text = text.replace("```", "")
     text = text.strip()
 
-    # Try direct parsing
-    try:
-        return json.loads(text)
-    except Exception:
-        pass
-
-    # Extract first JSON object
-    match = re.search(r"\{.*\}", text, re.DOTALL)
-
-    if match:
-        try:
-            return json.loads(match.group())
-        except Exception:
-            pass
-
-    return {}
+    return json.loads(text)
