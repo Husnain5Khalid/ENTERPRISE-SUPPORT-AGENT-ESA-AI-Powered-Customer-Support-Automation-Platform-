@@ -1,21 +1,20 @@
 CUSTOMERS = {
     "CUS001": {
-        "name": "Ali Hassan",
-        "plan": "Fiber Premium 200 Mbps",
+        "name": "John Smith",
+        "plan": "Premium Fiber",
         "status": "Active",
-        "city": "Riyadh",
-        "vip": False,
-        "last_ticket": "Internet Issue - Resolved",
-        "router": "Huawei AX3"
+        "region": "New York"
     },
-
     "CUS002": {
-        "name": "Sara Khan",
-        "plan": "Business Fiber",
+        "name": "Sarah Johnson",
+        "plan": "Business Pro",
         "status": "Active",
-        "city": "Jeddah",
-        "vip": True,
-        "last_ticket": "Billing Complaint",
-        "router": "Cisco RV340"
+        "region": "California"
+    },
+    "CUS003": {
+        "name": "Michael Brown",
+        "plan": "Basic Internet",
+        "status": "Suspended",
+        "region": "Texas"
     }
 }
